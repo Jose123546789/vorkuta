@@ -1,0 +1,182 @@
+[gd_scene load_steps=9 format=3 uid="uid://0cqh1vd4sqxi"]
+
+[ext_resource type="Texture2D" uid="uid://dpyprglw5rknb" path="res://recursos/sprites/palo nuevo v2.png" id="1_i4h1d"]
+[ext_resource type="Script" uid="uid://gl02hmb6c3l2" path="res://scripts/arma.gd" id="1_t1awj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tn6ss"]
+size = Vector2(161.745, 24.6967)
+
+[sub_resource type="Animation" id="Animation_btb33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.579449]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(19, 9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.7, 0.7)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cvhml"]
+resource_name = "palo"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.326377, 1.32296]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qw2bf"]
+resource_name = "palo_reset"
+length = 0.2255
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.32296, -0.326377]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_g5h5a"]
+resource_name = "right"
+length = 0.1795
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(19, 9), Vector2(-28, -69)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(-0.7, -0.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qw2bf"]
+_data = {
+&"RESET": SubResource("Animation_btb33"),
+&"palo": SubResource("Animation_cvhml"),
+&"palo_reset": SubResource("Animation_qw2bf"),
+&"right": SubResource("Animation_g5h5a")
+}
+
+[node name="arma" type="Node2D"]
+scale = Vector2(0.865, 0.54)
+
+[node name="Arma" type="CharacterBody2D" parent="."]
+position = Vector2(19, 9)
+rotation = -0.579449
+scale = Vector2(0.7, 0.7)
+disable_mode = 2
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_t1awj")
+
+[node name="spritepalo" type="Sprite2D" parent="Arma"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(90.7716, -48.4147)
+scale = Vector2(6, 6)
+texture = ExtResource("1_i4h1d")
+offset = Vector2(0.03, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arma"]
+position = Vector2(57.1776, -44.9061)
+rotation = -0.783653
+shape = SubResource("RectangleShape2D_tn6ss")
+disabled = true
+
+[node name="animacion_arma" type="AnimationPlayer" parent="Arma"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_qw2bf")
+}

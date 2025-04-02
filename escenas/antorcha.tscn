@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dgqogx4sqlse1"]
+
+[ext_resource type="Texture2D" uid="uid://b4om107c8e2u0" path="res://recursos/sprites/antorcha/antorchota.png" id="1_3yimf"]
+[ext_resource type="Texture2D" uid="uid://cmfmkhx1nybte" path="res://recursos/sprites/Luz.png" id="2_5sr84"]
+[ext_resource type="Texture2D" uid="uid://cfhvmhj2gdb24" path="res://recursos/sprites/antorcha/antorcha1.png" id="2_kgylw"]
+[ext_resource type="Texture2D" uid="uid://b5ntdut4nj06d" path="res://recursos/sprites/antorcha/antorcha2.png" id="3_u7bx5"]
+[ext_resource type="Texture2D" uid="uid://cw8hed7jsce4h" path="res://recursos/sprites/antorcha/antorcha3.png" id="4_8jye5"]
+[ext_resource type="Texture2D" uid="uid://bb5pp5vwpberf" path="res://recursos/sprites/antorcha/antorcha4.png" id="5_eo16u"]
+[ext_resource type="Texture2D" uid="uid://bdaxtc7567gwl" path="res://recursos/sprites/antorcha/antorcha5.png" id="6_heyfp"]
+[ext_resource type="Texture2D" uid="uid://b151mtw8n5ba0" path="res://recursos/sprites/antorcha/antorcha6.png" id="7_mf7lt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3yimf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3yimf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kgylw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_u7bx5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8jye5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eo16u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_heyfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mf7lt")
+}],
+"loop": true,
+"name": &"antorcha",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxyjw"]
+size = Vector2(113.314, 48.6801)
+
+[node name="antorcha" type="Node2D"]
+
+[node name="antorchahola" type="CharacterBody2D" parent="."]
+position = Vector2(1.90735e-06, 0)
+rotation = -0.579449
+scale = Vector2(0.865, 0.54)
+disable_mode = 2
+collision_layer = 4
+collision_mask = 4
+
+[node name="animacion" type="AnimatedSprite2D" parent="antorchahola"]
+texture_filter = 1
+position = Vector2(38.3378, -26.2068)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_3yimf")
+animation = &"antorcha"
+autoplay = "antorcha"
+frame_progress = 0.922985
+offset = Vector2(0.03, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="antorchahola"]
+position = Vector2(36.2712, -23.8155)
+rotation = -0.776671
+scale = Vector2(0.865, 0.54)
+shape = SubResource("RectangleShape2D_wxyjw")
+disabled = true
+debug_color = Color(0.367921, 0.515691, 0.886641, 0.42)
+
+[node name="PointLight2D" type="PointLight2D" parent="antorchahola"]
+position = Vector2(60.6718, -47.058)
+color = Color(0.694118, 0.376471, 0.109804, 0.921569)
+energy = 0.2
+shadow_enabled = true
+texture = ExtResource("2_5sr84")
+texture_scale = 0.9

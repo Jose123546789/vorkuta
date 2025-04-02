@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://ba0ha7huocus6"]
+
+[ext_resource type="Script" uid="uid://us7nyafuklrl" path="res://scripts/enemigoreal.gd" id="1_5qid6"]
+[ext_resource type="Texture2D" uid="uid://cbkum3jcsa3gj" path="res://recursos/sprites/sombra/Sombra.png" id="1_u32v7"]
+[ext_resource type="Texture2D" uid="uid://cirndon1uyh50" path="res://recursos/sprites/sombra/SombraMovimientoDerecha.png" id="3_lqt26"]
+[ext_resource type="Texture2D" uid="uid://6if3kknurh7c" path="res://recursos/sprites/sombra/SombraMovimientoIzquierdo.png" id="4_pe4y3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qid6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_u32v7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lqt26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pe4y3")
+}],
+"loop": true,
+"name": &"movimiento",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sgjm3"]
+radius = 6.7398
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u32v7"]
+size = Vector2(12, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slltc"]
+size = Vector2(52, 112)
+
+[node name="Enemigo" type="Node2D"]
+
+[node name="enemigoreal" type="CharacterBody2D" parent="."]
+script = ExtResource("1_5qid6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemigoreal"]
+light_mask = 2
+visibility_layer = 2
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_5qid6")
+animation = &"idle"
+
+[node name="Area2D" type="Area2D" parent="enemigoreal/AnimatedSprite2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigoreal/AnimatedSprite2D/Area2D"]
+scale = Vector2(17.1454, 16.6029)
+shape = SubResource("CircleShape2D_sgjm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigoreal"]
+position = Vector2(0, -2)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_u32v7")
+
+[node name="hitbox_sombra" type="Area2D" parent="enemigoreal"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigoreal/hitbox_sombra"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_slltc")
+
+[node name="cooldown" type="Timer" parent="enemigoreal"]
+wait_time = 0.5
+
+[connection signal="body_entered" from="enemigoreal/AnimatedSprite2D/Area2D" to="enemigoreal" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="enemigoreal/AnimatedSprite2D/Area2D" to="enemigoreal" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="enemigoreal/hitbox_sombra" to="enemigoreal" method="_on_hitbox_sombra_body_entered"]
+[connection signal="body_exited" from="enemigoreal/hitbox_sombra" to="enemigoreal" method="_on_hitbox_sombra_body_exited"]
+[connection signal="timeout" from="enemigoreal/cooldown" to="enemigoreal" method="_on_cooldown_timeout"]
